@@ -56,9 +56,6 @@ class Server:
             data.append(indexed_csv.get(next_index))
             next_index += 1
 
-        # the current page of the dataset
-        data = self.__dataset[index: next_index]
-
         return {
                     "index": index,
                     "data": data,
