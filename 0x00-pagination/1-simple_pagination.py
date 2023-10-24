@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+"""This module defines a class `Server` using an helper function `index_range`"""
+
 import csv
 import math
 from typing import List, Tuple
