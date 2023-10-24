@@ -42,10 +42,19 @@ class Server:
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """applies deletion-resilient hypermedia pagination"""
 
-        assert 0 <= index < len(self.__dataset)
+        assert 0 <= index < len(self.indexed_dataset())
 
-        # the next index to query with
-        next_index = min(index + page_size, len(self.__dataset))
+        indexed_csv = self.indexed_dataset()
+        data = []
+
+        # store current index first
+        next_index = index
+        for item in range(page_size):
+            # skip when index is missing
+            while not indexed_csv.get(next_index):
+                next_index += 1
+            data.append(indexed_csv.get(next_index))
+            next_index += 1
 
         # the current page of the dataset
         data = self.__dataset[index: next_index]
