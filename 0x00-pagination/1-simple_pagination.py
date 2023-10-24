@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""This module defines a class `Server` using an helper function `index_range`"""
+"""This module defines class `Server` using a helper function `index_range`"""
 
 import csv
 import math
