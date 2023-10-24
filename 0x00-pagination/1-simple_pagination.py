@@ -44,9 +44,4 @@ class Server:
         # unpack tuple
         start_index, end_index = index_range(page, page_size)
 
-        # call dataset method to load csv data file
-        self.dataset()
-
-        if len(self.__dataset) < end_index:
-            return []
-        return self.__dataset[start_index: end_index]
+        return self.dataset()[start_index: end_index]
