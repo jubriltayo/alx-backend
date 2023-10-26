@@ -106,3 +106,4 @@ class LFUCache(BaseCaching):
         # reinsert it at the correct position based on frequency
         self.keys_frequency.pop(mru_position)
         self.keys_frequency.insert(position_inserted, [mru_key, mru_frequency])
+    
