@@ -1,31 +1,29 @@
-#!/usr/bin/python3
-""" Defines FIFOCache """
+#!/usr/bin/env python3
+"""This module defines class LRUCache"""
 from base_caching import BaseCaching
 from collections import OrderedDict
 
 
 class LRUCache(BaseCaching):
-    """ A FIFO caching system """
+    """An LRU caching system"""
     def __init__(self):
-        """ Initializes our cache """
+        """Initializes class attributes"""
         super().__init__()
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """ Inserts values to cache """
-        if key is None or item is None:
-            return
-        if key not in self.cache_data:
-            if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
-                lru_key, _ = self.cache_data.popitem(True)
-                print("DISCARD:", lru_key)
+        """load data into cache"""
+        if key and item:
+            if key not in self.cache_data and\
+                    len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
+                lru_key, _ = self.cache_data.popitem()
+                print(f"DISCARD: {lru_key}")
             self.cache_data[key] = item
+            # move new entry far left
             self.cache_data.move_to_end(key, last=False)
-        else:
-            self.cache_data[key] = item
 
     def get(self, key):
-        """ Retrives data from our cache """
-        if key is not None and key in self.cache_data:
+        """retrieve item in cache"""
+        if key and key in self.cache_data:
             self.cache_data.move_to_end(key, last=False)
         return self.cache_data.get(key, None)
