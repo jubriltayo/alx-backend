@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+        <title> {{ _("home_title") }} </title>
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+        <h1> {{ _("home_header") }} </h1>
+
+        {% if g.user %}
+            <p>{{ _("logged_in_as", username=g.user["name"]) }}</p>
+        {% else %}
+            <p>{{ _("not_logged_in") }}</p>
+        {% endif %}
+
+        <p> {{ _("current_time_is", current_time=g.time) }} </p>
+    {% endblock %}
+</body>
+</html>
